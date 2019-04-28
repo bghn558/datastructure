@@ -1,0 +1,34 @@
+#两个数的和
+
+
+def twoSum(nums,target):
+    dict = {}
+    for i in range(len(nums)):
+        m = nums[i]
+        if target-m in dict:
+            return (dict[target-m]+1,i+1)
+        dict[m] = i
+
+#词根替换
+#[bat]
+#I have batteries
+#I have bat
+
+
+from collections import defaultdict
+
+
+def replaceWords(dict, sentence):
+    d = defaultdict(set())
+    s = defaultdict(int())
+    sentence = sentence.split()
+    for w in dict:
+        print(w[0])        #词根首字母
+        d[w[0]].add(w)          #以首字母的词根词典
+        s[w[0]] = max(s[w[0]], len(w))        #以首字母的词根最大长度
+    for i, w in enumerate(sentence):
+        for j in range(s[w[0]]):
+            if w[:j+1] in d[w[0]]:
+                sentence[i] = w[:j+1]
+                break
+    return ' '.join(sentence)
